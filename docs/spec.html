@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>chief — spec v1</title>
+<style>
+  :root{
+    --ink:#0d1117; --ink-soft:#3d4654; --line:#d7dce5; --bg:#f6f7fb; --card:#ffffff;
+    --brand:#1d4ed8; --brand-ink:#12328f;
+    --good:#047857; --bad:#be123c; --warn:#b45309; --violet:#6d28d9;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;}
+  .wrap{max-width:900px;margin:0 auto;padding:32px 20px 80px}
+  header{border-left:6px solid var(--brand);padding:4px 0 4px 18px;margin-bottom:8px}
+  h1{font-size:2.4rem;margin:0;letter-spacing:-.02em}
+  .sub{color:var(--ink-soft);margin:6px 0 0}
+  h2{font-size:1.35rem;margin:44px 0 10px;letter-spacing:-.01em}
+  h2 .n{color:var(--brand);font-variant-numeric:tabular-nums;margin-right:8px}
+  h3{font-size:1.02rem;margin:22px 0 6px;color:var(--brand-ink)}
+  p{margin:10px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;background:var(--card);
+        border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.94rem}
+  th{background:#eef2ff;color:var(--brand-ink);font-weight:650}
+  tr:last-child td{border-bottom:none}
+  .scroll{overflow-x:auto}
+  code{font-family:var(--mono);font-size:.88em;background:#eceff6;padding:1px 5px;border-radius:5px}
+  pre{background:#0d1117;color:#e6edf3;padding:16px;border-radius:10px;overflow-x:auto;
+      font-family:var(--mono);font-size:.85rem;line-height:1.55}
+  ul{margin:10px 0;padding-left:20px} li{margin:5px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .rule{border-left:5px solid var(--bad);background:#fff1f4;border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0}
+  .win{border-left:5px solid var(--good);background:#ecfdf5;border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0}
+  .gate{border-left:5px solid var(--violet);background:#f5f0ff;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+  .gate b{color:var(--violet)}
+  .tag{display:inline-block;font:600 .74rem/1 var(--mono);padding:4px 8px;border-radius:999px;
+       background:#1d4ed8;color:#fff;letter-spacing:.02em}
+  .tag.k{background:var(--good)} .tag.y{background:var(--warn)} .tag.v{background:var(--violet)}
+  .steps{counter-reset:s;list-style:none;padding:0}
+  .steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);
+            border-radius:12px;padding:14px 16px 14px 56px;position:relative;margin:10px 0}
+  .steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;
+            border-radius:50%;background:var(--brand);color:#fff;font:700 .9rem/28px var(--mono);text-align:center}
+  footer{margin-top:50px;color:var(--ink-soft);font-size:.88rem;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>chief</h1>
+  <p class="sub">Spec v1 · 2026-09-17 · settled over four rounds · nothing built yet</p>
+</header>
+
+<h2><span class="n">1</span>What this is</h2>
+<p>One agent — the <b>chief</b> — that you talk to. You bring ideas and judgment. It breaks
+work down, hands it to builder agents in the cloud, throws away the bad output, and brings you
+back a working thing to look at and one button to press.</p>
+<p>It runs on Anthropic's cloud on your Claude subscription, so it keeps working with your laptop
+closed. It works on any GitHub repo you own; repos are added one at a time, the first time you
+want work done in one.</p>
+
+<h3>What it fixes</h3>
+<div class="scroll"><table>
+<tr><th>Pain</th><th>Answer</th></tr>
+<tr><td><b>a.</b> Babysitting sessions</td><td>Cloud runs are autonomous. The chief answers small questions itself and escalates only what touches your vision</td></tr>
+<tr><td><b>b.</b> Re-entering a cold repo</td><td>Every agent PR updates <code>STATUS.md</code>; the chief reads it before proposing anything</td></tr>
+<tr><td><b>c.</b> Vague idea → buildable spec</td><td><span class="tag">idea</span> → up to 7 real options on a small HTML page → you pick → it writes the issue</td></tr>
+</table></div>
+
+<h3>foundry, inverted</h3>
+<div class="scroll"><table>
+<tr><th>foundry</th><th>chief</th></tr>
+<tr><td>Agent picked the work — 3 of 4 proposals declined</td><td>You start work. Suggestions on request, or as follow-ups on a finished PR</td></tr>
+<tr><td>Custodial loops: survey, warn, nudge</td><td>No scheduled scanning. Nothing runs unless you asked</td></tr>
+<tr><td>~12 repos, Discord, cross-app glue</td><td>GitHub only. One repo at a time. No Discord</td></tr>
+<tr><td>Output capped by your review capacity</td><td>The chief filters first; you review running results, not diffs</td></tr>
+<tr><td>Memory said "it's live", never what shipped</td><td>Memory records yield; one check-in question at two weeks</td></tr>
+</table></div>
+
+<h2><span class="n">2</span>Roles</h2>
+<div class="card">
+<p><b>You</b> — decide what gets built, judge UX / visuals / functionality, merge.</p>
+<p><b>The chief</b> — one definition, two modes. <b>Desk mode</b>: you talk to it from phone or
+terminal; it reads repo state and issues, turns talk into issues, starts jobs, shows you what's
+waiting. <b>Run mode</b>: it runs inside each cloud build; splits work, dispatches builders,
+verifies, rejects bad output, writes the PR.</p>
+<p><b>Builders</b> — implementer + reviewer subagents per task. Engine: start with superpowers
+<code>subagent-driven-development</code>, kept as one swappable line in the chief's prompt.
+Judge it on real tasks.</p>
+</div>
+
+<h2><span class="n">3</span>The loop</h2>
+<pre>idea (phone / terminal / issue)
+ └─ chief: options page (1 if obvious, max 7) ── you pick
+     └─ chief writes the issue: intent, done-gate, decision line
+         └─ label `build` → cloud run
+             └─ implementer + reviewer subagents
+                 └─ gate: build green · done-gate exercised · reviewer approved · mocked list
+                     ├─ pass → PR  (mechanical: auto-merge │ visible: your-call)
+                     └─ fail → retry ×2 → "stuck" note with options</pre>
+
+<h2><span class="n">4</span>The decision line</h2>
+<div class="scroll"><table>
+<tr><th>Brings to you</th><th>Decides alone</th></tr>
+<tr>
+<td>Anything a user sees (UX flow, visuals, wording, scope) · anything that costs money or adds an
+outside service · hard-to-undo data or schema changes · auth and security · deleting features or data</td>
+<td>Internal implementation · file layout · tests · refactors · choosing between equivalent
+libraries · fixing its own bugs</td>
+</tr>
+</table></div>
+<p>Each repo may adjust this line in its <code>CLAUDE.md</code>. <b>Overruling:</b> reply on the PR
+("undo decision 3, use X"). With the Claude GitHub App installed, the PR's session picks up review
+comments and makes the change. Nothing extra to build.</p>
+
+<h2><span class="n">5</span>The quality gate</h2>
+<div class="win">
+<p>Nothing reaches you until all four hold:</p>
+<ul>
+<li>Build and tests pass</li>
+<li>The issue's done-gate is actually exercised in the cloud (Playwright for UI)</li>
+<li>A separate reviewer subagent approves</li>
+<li>A list of everything still mocked, stubbed, or hardcoded on the gate path</li>
+</ul>
+<p>Failure → 2 retries → a short "stuck" note with options. Never a broken PR.</p>
+</div>
+
+<h2><span class="n">6</span>Audit trail — one source of truth</h2>
+<p><code>DECISIONS.md</code> at each repo root. Newest first. One line per entry:</p>
+<pre>2026-09-20 · Used server-side pagination over infinite scroll · list is unbounded · #42 · run</pre>
+<ul>
+<li>The PR description <b>points at</b> the entry; it keeps no copy of its own.</li>
+<li>The session transcript is evidence the entry links to. Sessions can be archived or deleted, so
+git is the durable layer.</li>
+<li>Chat is never the record — anything settled in desk mode is written into the issue first.</li>
+</ul>
+<div class="rule"><b>One line per entry, hard rule.</b> foundry's own lesson: append-only without a
+size limit turns into a swamp nobody reads.</div>
+
+<h2><span class="n">7</span>Surfaces</h2>
+<p>Labels: <span class="tag">idea</span> return options · <span class="tag k">build</span> do it ·
+<span class="tag y">your-call</span> chief applies, waiting on you</p>
+<div class="scroll"><table>
+<tr><th>Your queue</th><td>Saved search <code>is:open user:thomas-tahk label:your-call</code>. A page only if that feels clunky</td></tr>
+<tr><th>PR format</th><td>5-line summary · preview link · what's mocked · numbered decisions (linked to <code>DECISIONS.md</code>) · direct merge link · follow-up options</td></tr>
+<tr><th>Merging</th><td>Mechanical PRs turn on auto-merge and land themselves once checks pass. Visible PRs wait for your tap</td></tr>
+</table></div>
+
+<h2><span class="n">8</span>Infrastructure</h2>
+<div class="scroll"><table>
+<tr><th>Piece</th><th>Choice</th></tr>
+<tr><td>Compute</td><td>Claude Code cloud sessions — Anthropic-hosted VMs, subscription, laptop-off</td></tr>
+<tr><td>Trigger</td><td>A tiny GitHub Action fires the routine endpoint when you apply <code>build</code>. No AI runs in Actions, so it costs nothing</td></tr>
+<tr><td>Manual start</td><td>A pre-filled <code>claude.ai/code?prompt=…&amp;repositories=…</code> link on every issue</td></tr>
+<tr><td>Config in cloud</td><td><b>Cloud runs see only what is committed.</b> <code>~/.claude</code> does not travel — the kit commits the chief and its skills to <code>.claude/skills/</code> in each repo</td></tr>
+<tr><td>Concurrency</td><td>One job per repo (no merge conflicts), no overall cap</td></tr>
+<tr><td>GitHub access</td><td>Claude GitHub App per repo (needed for auto-fix), or the <code>/web-setup</code> token</td></tr>
+</table></div>
+
+<h3>Per-repo install kit</h3>
+<p>The chief opens a PR adding <code>.claude/skills/</code> (chief + build engine), a
+<code>CLAUDE.md</code> section (decision line, done-gate style, how to run and preview),
+a <code>STATUS.md</code> seed and empty <code>DECISIONS.md</code>,
+<code>.github/workflows/chief-fire.yml</code>, the three labels, and preview config.
+One-time manual clicks come as a <code>wizard</code> checklist.</p>
+
+<h2><span class="n">9</span>Repo layout</h2>
+<pre>chief/
+├─ prompts/chief.md      # the chief: desk mode + run mode
+├─ skills/               # vendored into target repos
+├─ kit/                  # install templates (workflow, CLAUDE.md block, labels)
+├─ install.sh            # onboard a repo → opens a PR
+└─ docs/spec.md          # this file</pre>
+
+<h2><span class="n">10</span>Unknowns — Step 0 proves these first</h2>
+<div class="scroll"><table>
+<tr><th>#</th><th>Question</th><th>Fallback if no</th></tr>
+<tr><td>1</td><td>Can a cloud run merge a PR or turn on auto-merge? (<code>gh</code> is installed; the GitHub proxy may restrict it)</td><td>Every PR waits for your tap; mechanical ones get a one-tap link</td></tr>
+<tr><td>2</td><td>Can a cloud session start another cloud job?</td><td>Desk chief replies with a pre-filled "Build this" link you tap</td></tr>
+<tr><td>3</td><td>Can a cloud run publish the HTML options page?</td><td>Commit it and serve via GitHub Pages, or post options as a Markdown comment</td></tr>
+<tr><td>4</td><td>What is the daily routine-run cap on this account?</td><td>If tight, drop the routine; pre-filled links become the only trigger</td></tr>
+<tr><td>5</td><td>Are Vercel previews login-protected? (priority-post previews were disabled in <code>991facb</code> to fix a red check, not for auth)</td><td>Screenshots and GIFs from the run, plus one-command local checkout</td></tr>
+</table></div>
+
+<h2><span class="n">11</span>Build order</h2>
+<ol class="steps">
+<li><b>Prove the unknowns.</b>
+  <div class="gate"><b>Gate:</b> a written yes/no plus fallback for all five.</div></li>
+<li><b>The build path, one repo.</b> Kit + chief run mode + label trigger.
+  <div class="gate"><b>Gate:</b> I label an issue <code>build</code> from my phone, and a PR comes back that builds, runs, and shows me a working preview — laptop off the whole time.</div></li>
+<li><b>Desk mode.</b> The chief you talk to; it writes issues and starts jobs.
+  <div class="gate"><b>Gate (v1 done-gate):</b> With my laptop off, I tell the chief an idea from my phone. It files an issue, a cloud run builds it without me, and I get one link. I open the preview, it works, and I tap merge.</div></li>
+<li><b>The idea path.</b> <code>idea</code> → options page → pick → issue.
+  <div class="gate"><b>Gate:</b> I drop a vague idea and get back an options page I can pick from.</div></li>
+<li><b>Second repo, different stack.</b> Proves it is project-agnostic.
+  <div class="gate"><b>Gate:</b> Adding a repo takes one command plus a short checklist.</div></li>
+</ol>
+
+<h2><span class="n">12</span>Non-goals</h2>
+<p>Discord · priority-post integration · scheduled suggestion loops · beads (revisit only if a
+single epic outgrows GitHub sub-issues) · multi-repo parallel work in one job · agents merging
+visible changes · numeric throughput targets.</p>
+
+<h2><span class="n">13</span>Check-in</h2>
+<div class="card">At two weeks the chief asks one question — <b>"Is this getting your backlog
+built?"</b> — next to a plain list of what shipped and what got stuck. No targets. Memory records
+what it produced, never that it is running.</div>
+
+<footer>chief — spec v1 · source of truth: <code>docs/spec.md</code></footer>
+</div>
+</body>
+</html>

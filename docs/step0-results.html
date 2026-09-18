@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>chief — Step 0 results</title>
+<style>
+  :root{
+    --ink:#0d1117; --ink-soft:#3d4654; --line:#d7dce5; --bg:#f6f7fb; --card:#ffffff;
+    --brand:#1d4ed8; --brand-ink:#12328f;
+    --good:#047857; --bad:#be123c; --warn:#b45309; --violet:#6d28d9;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;}
+  .wrap{max-width:900px;margin:0 auto;padding:32px 20px 80px}
+  header{border-left:6px solid var(--brand);padding:4px 0 4px 18px;margin-bottom:8px}
+  h1{font-size:2.4rem;margin:0;letter-spacing:-.02em}
+  .sub{color:var(--ink-soft);margin:6px 0 0}
+  h2{font-size:1.35rem;margin:44px 0 10px;letter-spacing:-.01em}
+  h2 .n{color:var(--brand);font-variant-numeric:tabular-nums;margin-right:8px}
+  h3{font-size:1.02rem;margin:22px 0 6px;color:var(--brand-ink)}
+  p{margin:10px 0}
+  a{color:var(--brand)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;background:var(--card);
+        border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.94rem}
+  th{background:#eef2ff;color:var(--brand-ink);font-weight:650}
+  tr:last-child td{border-bottom:none}
+  .scroll{overflow-x:auto}
+  code{font-family:var(--mono);font-size:.88em;background:#eceff6;padding:1px 5px;border-radius:5px}
+  pre{background:#0d1117;color:#e6edf3;padding:16px;border-radius:10px;overflow-x:auto;
+      font-family:var(--mono);font-size:.85rem;line-height:1.55}
+  pre code{background:none;padding:0;color:inherit}
+  ul{margin:10px 0;padding-left:20px} li{margin:5px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .rule{border-left:5px solid var(--bad);background:#fff1f4;border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0}
+  .win{border-left:5px solid var(--good);background:#ecfdf5;border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0}
+  .gate{border-left:5px solid var(--violet);background:#f5f0ff;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+  .gate b{color:var(--violet)}
+  .tag{display:inline-block;font:600 .74rem/1 var(--mono);padding:4px 8px;border-radius:999px;
+       background:#1d4ed8;color:#fff;letter-spacing:.02em;white-space:nowrap}
+  .tag.k{background:var(--good)} .tag.y{background:var(--warn)} .tag.n{background:var(--bad)}
+  .steps{counter-reset:s;list-style:none;padding:0}
+  .steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);
+            border-radius:12px;padding:14px 16px 14px 56px;position:relative;margin:10px 0}
+  .steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;
+            border-radius:50%;background:var(--brand);color:#fff;font:700 .9rem/28px var(--mono);text-align:center}
+  footer{margin-top:50px;color:var(--ink-soft);font-size:.88rem;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Step 0 results</h1>
+  <p class="sub">chief · 2026-09-18 · gate was <i>a written yes/no plus fallback for all five unknowns</i> · <b>met</b></p>
+</header>
+
+<p>Evidence comes from two cloud routine runs
+(<a href="https://claude.ai/code/session_01CNm2Z51wa7YWo1hpKdprjr">session_01CNm2Z51wa7YWo1hpKdprjr</a> and
+<a href="https://claude.ai/code/session_01QE7DREKLNwUiMqrsEr2oJ9">session_01QE7DREKLNwUiMqrsEr2oJ9</a>,
+routine <code>trig_01DhRVVaVgjJsWNXMbRnBdsj</code>) against the throwaway repo
+<a href="https://github.com/thomas-tahk/chief-probe">thomas-tahk/chief-probe</a>, plus the
+<a href="https://code.claude.com/docs/en/routines">routines documentation</a> and local inspection of priority-post.</p>
+
+<h2>Answers</h2>
+<div class="scroll"><table>
+<tr><th>#</th><th>Question</th><th>Answer</th></tr>
+<tr><td>1</td><td>Can a cloud run merge a PR / turn on auto-merge?</td>
+    <td><span class="tag k">YES, DIRECT MERGE</span><br>Proven end to end. Auto-merge arming is one setting short of proven</td></tr>
+<tr><td>2</td><td>Can a cloud session start another cloud job?</td>
+    <td><span class="tag k">YES</span><br>Proven — a child session ran to completion</td></tr>
+<tr><td>3</td><td>Can a cloud run publish the HTML options page?</td>
+    <td><span class="tag k">YES</span><br>The Artifact tool is available in-session and published a live page</td></tr>
+<tr><td>4</td><td>What is the daily routine-run cap?</td>
+    <td><span class="tag y">CAP EXISTS</span><br>The number is account-only. One-off runs are exempt</td></tr>
+<tr><td>5</td><td>Are Vercel previews login-protected?</td>
+    <td><span class="tag y">MOOT AS CONFIGURED</span><br>Previews are not built at all. Protection status still unverified</td></tr>
+</table></div>
+
+<h2><span class="n">1</span>Merging a PR — yes, direct merge</h2>
+
+<p>Answered on the second attempt, after installing the Claude GitHub App on the repo
+(<a href="https://claude.ai/code/session_01QE7DREKLNwUiMqrsEr2oJ9">session_01QE7DREKLNwUiMqrsEr2oJ9</a>, 272s).</p>
+
+<p>A cloud run opened its own PR and merged it into <code>main</code>, unattended:</p>
+
+<pre><code>mcp__github__merge_pull_request(pullNumber=2, merge_method="squash")
+→ {"sha":"e9f3a8ed74d783eee5b85cf90056651331f36f32","merged":true,
+   "message":"Pull Request successfully merged"}</code></pre>
+
+<p>Verified on the remote, not just claimed:</p>
+
+<pre><code>cad9729..e9f3a8e  main -> origin/main
+e9f3a8e Probe B: set counter to 2 (#2)
+cad9729 Seed scratch repo for chief Step 0 experiments</code></pre>
+
+<div class="win">Everything on the path works: <code>git push</code> of a <code>claude/</code>-prefixed branch
+(no complaint, no branch-name rejection), <code>mcp__github__create_pull_request</code> (PRs #1, #2, #3),
+and <code>mcp__github__add_issue_comment</code> for PR comments. No rate-limit or quota message anywhere in the run.</div>
+
+<h3>Auto-merge — the tool exists, the arming path is untested</h3>
+
+<p><code>mcp__github__enable_pr_auto_merge</code> <b>is available</b> in a cloud run and is GraphQL-backed,
+so the earlier worry — that auto-merge is GraphQL-only and therefore unreachable — is wrong. Calling it returned:</p>
+
+<pre><code>Auto-merge is not enabled for this repository.
+Enable it in repository Settings → General → Pull Requests → Allow auto-merge.</code></pre>
+
+<p>That is a repo setting, not a capability limit. I have since turned it on for <code>chief-probe</code>
+(<code>allow_auto_merge=true</code>). Two things remain unproven, and they are worth stating precisely:</p>
+
+<ul>
+<li><b>No cloud-run tool can flip that setting.</b> There is no <code>mcp__github__update_repository</code>.
+So <i>"Allow auto-merge"</i> joins the GitHub App install as a one-time manual click in the §8 install kit.</li>
+<li><b>Arming was never exercised.</b> GitHub refuses to arm auto-merge on a PR that is already mergeable —
+there must be something to wait for (a required check or a required review). <code>chief-probe</code> has neither,
+and adding branch protection to create the condition was blocked by the local permission classifier.</li>
+</ul>
+
+<div class="card"><b>I am deliberately not chasing this further.</b> The condition auto-merge needs — a PR held up
+by a required check — is exactly what a real repo with CI provides by itself. Testing it on a synthetic repo with
+a fake required check would prove less than testing it in Step 1 on priority-post, where the checks are real.
+Carried forward as a Step 1 verification, not a Step 0 hole.</div>
+
+<p><b>Fallback if arming turns out to fail:</b> direct merge already works, so a mechanical PR can be merged
+outright once the run has seen its checks pass, or it waits for your tap. The spec's written fallback —
+<i>"every PR waits for your tap"</i> — is the floor, and we are above it.</p>
+
+<h3>What the first attempt established</h3>
+
+<p>The first run failed every write path on one upstream cause — the Claude GitHub App was not installed on the repo:</p>
+
+<pre><code>remote: Claude doesn't have GitHub access to thomas-tahk/chief-probe for your organization.
+An org admin can install the Claude GitHub App at
+https://github.com/apps/claude/installations/select_target
+fatal: unable to access 'https://github.com/thomas-tahk/chief-probe/': The requested URL returned error: 403</code></pre>
+
+<p>Four independent attempts, all 403:</p>
+
+<div class="scroll"><table>
+<tr><th>Path</th><th>Result</th></tr>
+<tr><td><code>git push</code></td><td>403, with the App-install message above</td></tr>
+<tr><td><code>mcp__github__create_branch</code></td><td><code>403 Resource not accessible by integration</code></td></tr>
+<tr><td><code>mcp__github__push_files</code></td><td><code>403 Resource not accessible by integration</code></td></tr>
+<tr><td><code>mcp__github__create_or_update_file</code></td><td><code>403 Resource not accessible by integration</code></td></tr>
+</table></div>
+
+<p>Reads worked fine (<code>mcp__github__get_me</code>, <code>list_branches</code>), confirming the token is live and scoped read-only for this repo.</p>
+
+<div class="rule"><b>Repo onboarding is a hard gate, not a nicety.</b> A repo with no App install is read-only to cloud runs. Spec §8 already lists this as a one-time manual click; Step 0 confirms nothing works without it.</div>
+
+<h3>Correction to the spec</h3>
+<p>Spec §10 unknown 1 says <i>"<code>gh</code> is installed"</i>. <b>It is not.</b></p>
+<pre><code>/bin/bash: line 1: gh: command not found</code></pre>
+<p>GitHub access in a cloud run is through <code>mcp__github__*</code> tools and plain <code>git</code>, not the <code>gh</code> CLI. Anything in the kit or the chief's run-mode prompt that shells out to <code>gh</code> will fail. This affects the PR-writing and label-reading steps throughout §3 and §7.</p>
+
+<h2><span class="n">2</span>Starting another cloud job — yes</h2>
+
+<p>This was the load-bearing unknown, and the docs pointed the wrong way
+(<i>"You are inside a cloud session → manage routines from the web UI instead"</i>).
+That restriction applies to the <code>/schedule</code> command, not to the underlying capability.</p>
+
+<p>A cloud session has a <code>Claude_Code_Remote</code> MCP connector exposing:</p>
+
+<pre><code>mcp__Claude_Code_Remote__create_session
+mcp__Claude_Code_Remote__fire_trigger
+mcp__Claude_Code_Remote__create_trigger
+mcp__Claude_Code_Remote__list_sessions
+mcp__Claude_Code_Remote__get_session</code></pre>
+
+<p>The probe called <code>create_session</code> and it was accepted:</p>
+
+<pre><code>{"id":"session_01RjvkwPrmLiusKqAh7h13Ct","title":"chief-probe-b-test",
+ "session_status":"SESSION_STATUS_PENDING","origin":"claude_code_mcp_seed"}</code></pre>
+
+<p>The child session ran and printed <code>CHIEF PROBE B OK</code>, verified through <code>get_session</code>.
+Separately, the <code>Agent</code> tool in a cloud session exposes <code>isolation: "remote"</code> as a second path to the same thing.</p>
+
+<div class="win"><b>Consequence for the design:</b> desk mode can dispatch build jobs itself. The spec's fallback — <i>"Desk chief replies with a pre-filled 'Build this' link you tap"</i> — is not needed.</div>
+
+<p>It also makes spec §8's GitHub Action questionable. That Action existed only to bridge label→run because nothing else could fire a job. Two things now complicate it:</p>
+<ul>
+<li>GitHub triggers are native, but cover only <code>pull_request</code> and <code>release</code> events. <b>There is no issue-labeled event</b>, so <code>build</code> on an issue still has no native path.</li>
+<li>A long-lived desk chief could poll or be told directly, dispatching via <code>create_session</code>.</li>
+</ul>
+
+<p>The Action is still the only way to make labeling an issue from a phone start a run with nothing else awake. Keep it, but it is now one option among several rather than the only mechanism.</p>
+
+<h2><span class="n">3</span>Publishing the options page — yes</h2>
+
+<p>The Artifact tool is available inside a cloud run and published a live page:</p>
+
+<div class="win"><a href="https://claude.ai/artifact/5nAghj8aaTHnZ1kQUXfEvp">https://claude.ai/artifact/5nAghj8aaTHnZ1kQUXfEvp</a></div>
+
+<p>The <code>idea</code> → options-page flow needs no GitHub Pages fallback and no Markdown-comment degradation. The run can hand back a real URL.</p>
+
+<p>The Pages fallback was not testable on the first run — enabling Pages is a write, and writes were 403. Untested, and now unnecessary. PR comments are confirmed available (<code>mcp__github__add_issue_comment</code>), so the second fallback channel exists too.</p>
+
+<h2><span class="n">4</span>Daily routine cap — exists, number is account-only</h2>
+
+<p>From the <a href="https://code.claude.com/docs/en/routines">routines docs</a>:</p>
+
+<div class="card">routines have a daily cap on how many runs can start per account</div>
+
+<p>The number is not published; it is shown at <a href="https://claude.ai/code/routines">claude.ai/code/routines</a>
+and <a href="https://claude.ai/settings/usage">claude.ai/settings/usage</a>. <b>Still to be read off the account.</b></p>
+
+<p>Three things soften this:</p>
+<ul>
+<li><b>One-off runs do not count against the cap.</b> A one-off schedule fires once at a timestamp, then auto-disables.</li>
+<li>Sessions started by <code>create_session</code> from inside a run carry <code>origin: claude_code_mcp_seed</code>, not a routine fire — whether those count against the routine cap is <b>unverified</b>, and worth knowing, because it decides whether the chief's own dispatches are metered.</li>
+<li>With usage credits on, runs past the cap continue on metered overage instead of being rejected.</li>
+</ul>
+
+<p><b>Fallback if tight</b> (unchanged from the spec): drop the routine and use pre-filled links as the trigger. Now joined by a better one: dispatch via <code>create_session</code> from a desk chief.</p>
+
+<h2><span class="n">5</span>Vercel preview protection — moot as configured</h2>
+
+<p>priority-post does not build previews at all. From <code>vercel.json</code>:</p>
+
+<pre><code>{"ignoreCommand": "if [ \"$VERCEL_ENV\" = \"preview\" ]; then exit 0; else exit 1; fi"}</code></pre>
+
+<p>Exit 0 skips the build, so every preview deploy is skipped. This was done in <code>991facb</code> to clear a red check, not for auth — the memory on this was right.</p>
+
+<p>So there is currently no preview URL to be protected. Whether Vercel Authentication would gate one if previews were re-enabled is <b>unverified</b> (needs the Vercel dashboard, or a throwaway branch with <code>ignoreCommand</code> flipped).</p>
+
+<p><b>This matters less than expected</b>, because of what Step 0 found instead — see below.</p>
+
+<h2>New findings the spec did not anticipate</h2>
+
+<h3>Playwright is preinstalled, with browsers</h3>
+<pre><code>Version 1.56.1
+chromium  chromium-1194  chromium_headless_shell-1194  ffmpeg-1011</code></pre>
+<div class="win">Spec §5's quality gate — <i>"the issue's done-gate is actually exercised in the cloud (Playwright for UI)"</i> — needs no setup script. This is the single best news in Step 0 for the gate's feasibility.</div>
+
+<h3>Network egress is restricted — and <code>*.vercel.app</code> is blocked</h3>
+
+<p><b>Answered 2026-09-18 by a follow-up probe</b>
+(<a href="https://claude.ai/code/session_01DJEoSBs4U9QnJ5zS7BKDts">session_01DJEoSBs4U9QnJ5zS7BKDts</a>, 101s).
+The risk flagged here turned out to be real. Vercel is not on the Trusted allowlist:</p>
+
+<div class="scroll"><table>
+<tr><th>URL</th><th>Code</th><th></th></tr>
+<tr><td><code>https://priority-post.vercel.app</code></td><td><code>000</code></td><td class="bad"><b>BLOCKED</b></td></tr>
+<tr><td><code>https://knowflow.vercel.app</code></td><td><code>000</code></td><td class="bad"><b>BLOCKED</b></td></tr>
+<tr><td><code>https://vercel.com</code></td><td><code>000</code></td><td class="bad"><b>BLOCKED</b></td></tr>
+<tr><td><code>https://github.com</code></td><td><code>400</code></td><td>reachable</td></tr>
+<tr><td><code>https://api.github.com</code></td><td><code>200</code></td><td>reachable</td></tr>
+<tr><td><code>https://registry.npmjs.org</code></td><td><code>200</code></td><td>reachable</td></tr>
+<tr><td><code>https://example.com</code></td><td><code>000</code></td><td class="bad"><b>BLOCKED</b> — the control, so the policy is unchanged and the result is trustworthy</td></tr>
+</table></div>
+
+<p>Playwright reports the same denial as <code>net::ERR_TUNNEL_CONNECTION_FAILED</code>:</p>
+<pre><code>Launching chromium... Chromium launched successfully.
+Navigating to https://priority-post.vercel.app ...
+Navigation error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED
+Element counts: 0 &lt;button&gt;, 0 &lt;a&gt;</code></pre>
+
+<div class="win"><b>The gate's machinery is fine; only its reach is not.</b> Chromium launched, drove, and wrote a 27 KB screenshot — the failure is purely the proxy.</div>
+
+<div class="rule"><b>Fix (one manual click, no code):</b> the environment's <b>Network access</b> → <b>Custom</b> → add <code>*.vercel.app</code>, with <i>"Also include default list of common package managers"</i> checked. That is a cloud-environment setting; no tool inside a run can change it, so it joins the one-time-clicks checklist.</div>
+
+<p><b>Second gotcha, found the same way:</b> Playwright is installed <b>globally</b>, so <code>import { chromium } from 'playwright'</code> fails with <code>ERR_MODULE_NOT_FOUND</code>. Use <code>createRequire(import.meta.url)('/opt/node22/lib/node_modules/playwright')</code> or set <code>NODE_PATH=/opt/node22/lib/node_modules</code>. Any quality-gate script that does the obvious thing will fail on this first.</p>
+
+<h3>The original finding</h3>
+<p><code>example.com</code> was <b>denied</b>:</p>
+<pre><code>000 [agent-proxy] example.com:443 — connect_rejected
+(the egress proxy denied the CONNECT (organization policy) or could not reach the destination)</code></pre>
+<p><code>api.anthropic.com</code> was reachable (HTTP 404 from Cloudflare — a response, not a rejection).</p>
+
+<p>The Default environment uses <b>Trusted</b> network access: a fixed allowlist of package registries and common dev domains. Preview <i>reachability from the run</i> is the binding constraint; preview <i>auth</i> (unknown 5) is downstream of it and cannot even be asked until the allowlist is widened.</p>
+
+<h3>Runtime versions</h3>
+<p><code>node v22.22.2</code> · <code>python 3.11.15</code> · <code>git 2.43.0</code> · no <code>gh</code></p>
+
+<h2>Step 0 gate: met</h2>
+
+<div class="gate"><b>Verdict:</b> all five have a written answer and a fallback. Nothing here blocks Step 1.</div>
+
+<p>Two answers are partial, and neither is worth more Step 0 effort:</p>
+<ul>
+<li><b>Auto-merge arming</b> (unknown 1) needs a PR held up by a real required check to test honestly.
+priority-post has real checks; a scratch repo does not. Better tested in Step 1.</li>
+<li><b>The exact daily cap number</b> (unknown 4) is still unread. It matters much less now that unknown 2
+came back YES — the chief can dispatch via <code>create_session</code> instead of firing routines, and
+one-off runs are exempt from the cap anyway.</li>
+</ul>
+
+<h3>Carry into Step 1</h3>
+<ul>
+<li>Purge <code>gh</code> from the kit and the chief's run-mode prompt; use <code>mcp__github__*</code></li>
+<li>Add <b>"Allow auto-merge"</b> to the §8 one-time-clicks checklist, next to the GitHub App install — no cloud-run tool can set it</li>
+<li><s>Verify <code>*.vercel.app</code> egress before trusting the done-gate.</s> <b>Done — it is blocked.</b> Add <code>*.vercel.app</code> to the environment's allowed domains; until then the gate cannot see a preview</li>
+<li>Arm auto-merge on a real PR with real checks, and confirm it lands</li>
+<li>Check whether <code>create_session</code> children count against the routine cap</li>
+</ul>
+
+<h3>Cleanup owed</h3>
+<ul>
+<li><a href="https://github.com/thomas-tahk/chief-step0">thomas-tahk/chief-step0</a> — wedged mid-visibility-change, abandoned. Needs deleting <i>(the local token lacks <code>delete_repo</code>)</i></li>
+<li><a href="https://github.com/thomas-tahk/chief-probe">thomas-tahk/chief-probe</a> — unknown 1 is closed, so this can go too.
+  <a href="https://github.com/thomas-tahk/chief-probe/pull/3">PR #3</a> holds the run's own writeup if you want to read it before deleting</li>
+<li>Routine <code>trig_01DhRVVaVgjJsWNXMbRnBdsj</code> — delete; Step 0 is done with it</li>
+<li>Routine <code>trig_01CQbE2BFnw6wYixzgasDkbo</code> (<i>Weekly cross-project activity report</i>) — unrelated leftover,
+  already disabled, last fired 2026-06-26. Superseded by the GitHub Actions version. Its prompt opens
+  <i>"the gh CLI is authenticated"</i>, which Step 0 disproves — the likely reason it stopped working. Safe to delete</li>
+</ul>
+
+<footer>chief — Step 0 results · source of truth: <code>docs/step0-results.md</code></footer>
+</div>
+</body>
+</html>

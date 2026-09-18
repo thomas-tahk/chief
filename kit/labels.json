@@ -1,0 +1,5 @@
+[
+  {"name": "idea",      "color": "c5def5", "description": "Vague. The chief returns options to pick from."},
+  {"name": "build",     "color": "0e8a16", "description": "Do it. Applying this label starts a cloud run."},
+  {"name": "your-call", "color": "d93f0b", "description": "Built and waiting on you — something a user would see."}
+]
