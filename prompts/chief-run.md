@@ -34,7 +34,12 @@ you cannot tell them apart, the target is the one named in the payload.
 
 Read, in this order:
 
-1. The issue — `mcp__github__get_issue`. Its body is the task.
+1. The issue — `mcp__github__get_issue`, **and its comments**
+   (`mcp__github__get_issue_comments`). The body is the task; the comments are
+   where it was already argued about. An old issue's body can contradict an
+   architecture that was settled after it was written, and building the body
+   faithfully is then the wrong result. If a comment declines or redirects the
+   issue, say so in your PR and build what survives that comment, not the body.
 2. `STATUS.md` in the target repo — where the project actually is.
 3. `DECISIONS.md` in the target repo — what was already settled, so you do not
    relitigate it.
