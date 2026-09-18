@@ -4,7 +4,7 @@
 # Runs on your laptop, where `gh` exists. (It does not exist in cloud runs.)
 # Everything this cannot automate is listed in kit/README.md — read it after.
 #
-#   ./install.sh thomas-tahk/knowflow
+#   ./install.sh thomas-tahk/pocket-draft
 
 set -euo pipefail
 
@@ -84,7 +84,7 @@ which have an API a script or a cloud run can reach.
 - [ ] Install the [Claude GitHub App](https://github.com/apps/claude/installations/select_target) on this repo — without it every write from a run is a 403
 - [ ] Settings → General → Pull Requests → **Allow auto-merge**
 - [ ] Settings → Secrets and variables → Actions → add `CHIEF_ROUTINE_ID` and `CHIEF_ROUTINE_TOKEN`
-- [ ] Confirm previews actually build (no `vercel.json` `ignoreCommand` skipping them)
+- [ ] Confirm the run can reach whatever the done-gate must be exercised against — a server it starts itself on `localhost` works out of the box; a remote preview host needs adding to the environment's network allowlist, and must not be skipped by a `vercel.json` `ignoreCommand`
 - [ ] Fill in the run/preview commands in the `CLAUDE.md` block, and adjust the decision line for this repo
 
 Full detail: [`kit/README.md`](https://github.com/thomas-tahk/chief/blob/main/kit/README.md)

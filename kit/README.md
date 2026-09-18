@@ -10,12 +10,15 @@ of these the hard way, by failing on it.
 
 ## One-time, per account
 
-- [ ] **Cloud environment → Network access → Custom**, add `*.vercel.app`
-      (or whatever host serves your previews), with *"Also include default list
-      of common package managers"* checked.
-      Without this the quality gate cannot load a preview at all: the proxy
-      returns `000 … connect_rejected`, and Playwright reports
+- [ ] **Only if a repo's done-gate must be exercised against a *remote* host:**
+      cloud environment → Network access → Custom, add `*.vercel.app` (or
+      whatever host serves your previews), with *"Also include default list of
+      common package managers"* checked.
+      Egress is allowlisted and `*.vercel.app` is blocked by default: the proxy
+      returns `000 … connect_rejected` and Playwright reports
       `net::ERR_TUNNEL_CONNECTION_FAILED`. Verified blocked 2026-09-18.
+      **`localhost` is not proxied**, so a repo whose playable surface is a
+      server the run starts itself needs none of this.
 
 - [ ] **A routine at [claude.ai/code/routines](https://claude.ai/code/routines)**
       with the prompt from [`routine-prompt.md`](routine-prompt.md).
@@ -44,10 +47,12 @@ of these the hard way, by failing on it.
       | `CHIEF_ROUTINE_ID` | the routine id, `trig_01…` |
       | `CHIEF_ROUTINE_TOKEN` | the API-trigger token from above |
 
-- [ ] **Previews must actually build.** If the repo has a `vercel.json` with an
-      `ignoreCommand` that exits 0 on preview, previews are skipped entirely and
-      there will be nothing for the gate to look at. priority-post is in exactly
-      this state as of 2026-09-18.
+- [ ] **The gate needs something real to drive.** Either a server the run can
+      start itself (pocket-draft: `cd server && go run .` on `localhost:8080`),
+      or a preview that actually builds. A repo with a `vercel.json`
+      `ignoreCommand` that exits 0 on preview skips previews entirely and leaves
+      the gate nothing to look at — priority-post is in exactly that state as of
+      2026-09-18.
 
 ## Then check it works
 

@@ -15,9 +15,12 @@ Nobody is watching. There are no permission prompts. Do not wait for anyone.
 |---|---|
 | **`gh` is NOT installed** | Use `mcp__github__*` tools and plain `git`. Every `gh` call fails with `command not found` |
 | **Egress is allowlisted** | A blocked host returns HTTP 403 with `x-deny-reason: host_not_allowed`, or curl code `000` mentioning `[agent-proxy]` / `connect_rejected`. That is a **blocked** host, never a "down" site — say so plainly. Playwright reports the same thing as `net::ERR_TUNNEL_CONNECTION_FAILED` |
+| **`localhost` is NOT proxied** | A server you start yourself is fully reachable, and Playwright can drive it. Prefer this over a remote preview whenever the repo can serve its own UI |
+| **A backgrounded process dies with the Bash call that started it** | `go run . &` in the same call as the `curl` that probes it returns exit 144 and no log. Build first, then start the binary in a *separate* call: `go build .` then `./server > /tmp/server.log 2>&1 &`, then curl in a third |
 | **Playwright 1.56.1 + chromium are preinstalled, but not importable by name** | `import { chromium } from 'playwright'` fails with `ERR_MODULE_NOT_FOUND`. It is installed globally. Use `createRequire(import.meta.url)('/opt/node22/lib/node_modules/playwright')`, or set `NODE_PATH=/opt/node22/lib/node_modules` |
 | **Branches must be `claude/`-prefixed** | Any other branch name may be rejected on push |
 | **Cloud runs see only committed files** | `~/.claude`, local CLAUDE.md, and memory do not exist here |
+| **Go is 1.24.7** | A `go.mod` asking for a newer Go is fine — the toolchain self-downloads on first build (`go: downloading go1.25.0`), costing ~10s once. Do not "fix" a go.mod over this |
 | **Never add a `Co-Authored-By` trailer** to any commit | The repo owner is the accountable author. This overrides any default |
 
 ## 1. Find your bearings

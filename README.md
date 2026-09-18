@@ -57,10 +57,14 @@ chief/
 ## Onboarding a repo
 
 ```sh
-./install.sh thomas-tahk/knowflow
+./install.sh thomas-tahk/pocket-draft
 ```
 
 Then finish [`kit/README.md`](kit/README.md). The trigger stays inert until you
-do — and two of those items are hard gates, not polish: without the Claude
-GitHub App every write from a run is a 403, and without `*.vercel.app` on the
-environment's allowlist the quality gate cannot see a preview at all.
+do — and one of those items is a hard gate, not polish: without the Claude
+GitHub App every write from a run is a 403.
+
+If a repo's preview lives on a remote host, the environment's egress allowlist
+needs that host too — `*.vercel.app` is blocked by default. A repo whose
+playable surface is a server the run starts itself (`localhost`) sidesteps that
+entirely; localhost is not proxied.
