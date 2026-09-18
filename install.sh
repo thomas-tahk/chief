@@ -72,9 +72,10 @@ CHIEF_ROUTINE_TOKEN. See the checklist in the PR body."
 
 git push -q -u origin "$BRANCH"
 
-gh pr create --repo "$REPO" --head "$BRANCH" \
-  --title "Install the chief" \
-  --body "$(cat <<'BODY'
+# Written to a file rather than inlined as "$(cat <<'BODY' ... )": bash 3.2, which
+# is what macOS ships, mis-parses a quoted heredoc inside command substitution as
+# soon as the body contains an apostrophe.
+cat > "$WORK/pr-body.md" <<'BODY'
 Onboards this repo so an issue labelled `build` starts an autonomous cloud run
 that opens a PR back here.
 
@@ -89,7 +90,10 @@ which have an API a script or a cloud run can reach.
 
 Full detail: [`kit/README.md`](https://github.com/thomas-tahk/chief/blob/main/kit/README.md)
 BODY
-)"
+
+gh pr create --repo "$REPO" --head "$BRANCH" \
+  --title "Install the chief" \
+  --body-file "$WORK/pr-body.md"
 
 echo
 echo "PR opened. Finish the checklist in kit/README.md — the trigger stays inert until then."
